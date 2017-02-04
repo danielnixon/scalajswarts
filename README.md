@@ -1,5 +1,8 @@
 # Scala.js Warts
 
+[![Build Status](https://travis-ci.org/danielnixon/scalajswarts.svg?branch=master)](https://travis-ci.org/danielnixon/scalajswarts)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.danielnixon/scalajswarts_2.12/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.danielnixon/scalajswarts_2.12)
+
 [WartRemover](https://github.com/wartremover/wartremover) warts for [Scala.js](https://www.scala-js.org/).
 
 ## Usage
