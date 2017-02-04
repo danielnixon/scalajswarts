@@ -31,4 +31,8 @@
 
 ### UndefOrOpsPartial
 
-`scala.scalajs.js.UndefOrOps` has a `get` method which will throw if the value is undefined. The program should be refactored to use `scala.scalajs.js.UndefOrOps#getOrElse` or `scala.scalajs.js.UndefOrOps#fold` to explicitly handle both the defined and undefined cases.
+`scala.scalajs.js.UndefOrOps` has a `get` method which will throw if the value is undefined. The program should be refactored to use `UndefOrOps#getOrElse` or `UndefOrOps#fold` to explicitly handle both the defined and undefined cases.
+
+## See also
+
+* [PlayWarts](https://github.com/danielnixon/playwarts):  WartRemover warts for [Play Framework](https://www.playframework.com/).
