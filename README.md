@@ -5,6 +5,12 @@
 
 [WartRemover](https://github.com/wartremover/wartremover) warts for [Scala.js](https://www.scala-js.org/).
 
+## Versions
+
+| Scala.js Warts version | WartRemover version | Scala.js version   | Scala version  |
+|------------------------|---------------------|--------------------|----------------|
+| 0.1.0                  | 1.3.0               | 0.6.14             | 2.11.8, 2.12.1 |
+
 ## Usage
 
 1. Setup [WartRemover](https://github.com/wartremover/wartremover).
