@@ -9,7 +9,7 @@
 
 | Scala.js Warts version | WartRemover version | Scala.js version   | Scala version  |
 |------------------------|---------------------|--------------------|----------------|
-| 0.1.0                  | 1.3.0               | 0.6.14             | 2.11.8, 2.12.1 |
+| 0.2.0                  | 1.3.0               | 0.6.14             | 2.11.8, 2.12.1 |
 
 ## Usage
 
@@ -23,11 +23,33 @@
 3. Add the following to your `build.sbt`:
     ```scala
     wartremoverWarnings ++= Seq(
+      ScalaJSWart.ArrayPartial,
       ScalaJSWart.UndefOrOpsPartial
    )
     ```
 
 ## Warts
+
+### ArrayPartial
+
+`scala.scalajs.js.Array[T]` has `apply`, `pop` and `shift` methods, all of which can return `undefined` (even though their return type is `T`, not `UndefOr[T]`). This can lead to [`UndefinedBehaviorError`s](https://www.scala-js.org/doc/semantics.html#undefined-behaviors).
+
+You can wrap these methods in an implicit that might look something like this:
+
+```scala
+  @SuppressWarnings(Array("org.danielnixon.scalajswarts.ArrayPartial"))
+  implicit class SaferArray[A](val value: scala.scalajs.js.Array[A]) extends AnyVal {
+    def applyOpt(index: Int): Option[A] = liftUndefined(value.apply(index))
+
+    def popOpt(): Option[A] = liftUndefined(value.pop())
+
+    def shiftOpt(): Option[A] = liftUndefined(value.shift())
+
+    private def liftUndefined[T <: scala.Any](v: T): Option[T] = {
+      if (scalajs.js.isUndefined(v)) None else Some(v)
+    }
+  }
+```
 
 ### UndefOrOpsPartial
 
