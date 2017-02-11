@@ -5,6 +5,7 @@ val scala211 = "2.11.8"
 val scala212 = "2.12.1"
 val coreName = "scalajswarts"
 val wartremoverVersion = "1.3.0"
+val wartHelpersVersion = "0.1.0"
 
 lazy val commonSettings = Seq(
   organization := "org.danielnixon",
@@ -56,7 +57,8 @@ lazy val core = Project(
   scalaVersion := scala211,
   crossScalaVersions := Seq(scala211, scala212),
   libraryDependencies ++= Seq(
-    "org.wartremover" %% "wartremover" % wartremoverVersion
+    "org.wartremover" %% "wartremover" % wartremoverVersion,
+    "org.danielnixon" %% "wart-helpers" % wartHelpersVersion
   ),
   scalacOptions ++= Seq("-Xlint:_", "-Ywarn-unused", "-Ywarn-unused-import")
 ): _*)
@@ -74,5 +76,6 @@ lazy val sbtPlug: Project = Project(
   scalaVersion := scala210,
   addSbtPlugin("org.wartremover" %% "sbt-wartremover" % wartremoverVersion),
   addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.14"),
+  libraryDependencies += "org.danielnixon" %% "wart-helpers-sbt" % wartHelpersVersion,
   scalacOptions += "-Xlint"
 ): _*)

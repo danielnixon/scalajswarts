@@ -1,5 +1,6 @@
 package org.danielnixon.scalajswarts
 
+import org.danielnixon.warthelpers.CoursierResolver
 import sbt._
 import sbt.Keys._
 import wartremover.WartRemover
@@ -23,26 +24,10 @@ object ScalaJSWarts extends AutoPlugin {
         case Some((2, y)) if y >= 11 =>
 
           val artifactID = s"${BuildInfo.artifactID}_2.$y"
-          val version = BuildInfo.version
-          val jarWithVersion = s"$artifactID-$version.jar"
-          val org = BuildInfo.organization
+          val files = CoursierResolver.resolve(BuildInfo.organization, artifactID, BuildInfo.version)
+          val urls = files.map(_.toURI.toURL.toString)
+          urls ++ value
 
-          // TODO: Can we persuade sbt to resolve this for us without making it a library dependency?
-          val url = if (BuildInfo.isSnapshot) {
-            val path = Path.userHome / ".ivy2" / "local" / org / artifactID / version / "jars" / s"$artifactID.jar"
-            path.toURI.toURL
-          } else {
-            val orgPath = org.replace('.', '/')
-            new URL(s"https://repo1.maven.org/maven2/$orgPath/$artifactID/$version/$jarWithVersion")
-          }
-
-          val to = target.value / jarWithVersion
-          if (!to.exists) {
-            streams.value.log.info(s"Downloading [$url].")
-            IO.download(url, to)
-          }
-          streams.value.log.info(s"Adding [$jarWithVersion] to WartRemover classpath.")
-          to.toURI.toString +: value
         case _ => value
       }
     }

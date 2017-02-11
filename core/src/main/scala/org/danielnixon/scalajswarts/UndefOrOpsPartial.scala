@@ -1,5 +1,7 @@
 package org.danielnixon.scalajswarts
 
+import org.danielnixon.warthelpers.ClassWart
+
 // TODO: orNull as well?
 object UndefOrOpsPartial extends ClassWart(
   "org.danielnixon.scalajswarts.UndefOrOpsPartial",
