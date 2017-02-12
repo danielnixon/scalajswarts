@@ -9,7 +9,7 @@
 
 | Scala.js Warts version | WartRemover version | Scala.js version   | Scala version  |
 |------------------------|---------------------|--------------------|----------------|
-| 0.2.0                  | 1.3.0               | 0.6.14             | 2.11.8, 2.12.1 |
+| 0.4.0                  | 2.0.1               | 0.6.14             | 2.11.8, 2.12.1 |
 
 ## Usage
 
@@ -17,7 +17,7 @@
 2. Add the following to your `plugins.sbt`:
 
     ```scala
-    addSbtPlugin("org.danielnixon" % "sbt-scalajswarts" % "0.1.0")
+    addSbtPlugin("org.danielnixon" % "sbt-scalajswarts" % "0.4.0")
     ```
 
 3. Add the following to your `build.sbt`:
